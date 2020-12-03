@@ -14,6 +14,7 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
 
   return (
     <PopupWithForm 
+      isModal={true}
       name={'update-avatar'} 
       title={'Обновить аватар'} 
       children={

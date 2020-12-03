@@ -45,8 +45,13 @@ function App() {
         history.push('/');
       })
       .catch((err) => {
-        console.error({ message: err.message });
+        console.error(err);
+        setMessage({ 
+          icon: rejectIcon, 
+          text: 'Что-то пошло не так! Попробуйте ещё раз.' 
+        });
       });
+    setInfoTooltipOpen(true);
   }
 
   function handleRegister(email, password) {
@@ -64,7 +69,7 @@ function App() {
         });
       })
       .catch((err) => {
-        console.error({ message: err.message });
+        console.error(err);
         setMessage({ 
           icon: rejectIcon, 
           text: 'Что-то пошло не так! Попробуйте ещё раз.' 
@@ -77,7 +82,7 @@ function App() {
     localStorage.removeItem('jwt');
     setEmail('');
     setLoggedIn(false);
-    history.push('/signup');
+    history.push('/signin');
   }
 
   function handleEditProfileClick() {
@@ -171,8 +176,13 @@ function App() {
             history.push('/');
         })
         .catch((err) => {
-          console.error({ message: err.message });
+          console.error(err);
+          setMessage({ 
+            icon: rejectIcon, 
+            text: 'Что-то пошло не так! Попробуйте ещё раз.' 
+          });
         });
+      setInfoTooltipOpen(true);
     }
   }, []);
 
@@ -215,7 +225,7 @@ function App() {
                 />
               </Route>
               <Route>
-                {loggedIn ? <Redirect to="/" /> : <Redirect to="/signup" />}
+                {loggedIn ? <Redirect to="/" /> : <Redirect to="/signin" />}
               </Route>
             </Switch>
             <Footer />

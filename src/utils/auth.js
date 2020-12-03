@@ -9,9 +9,13 @@ export const register = (email, password) => {
     },
     body: JSON.stringify({ email, password })
   })
-  .then((res) => res.ok 
-  ? res.json() 
-  : res.status(400).send({ message: 'некорректно заполнено одно из полей' }));
+  .then((res) => {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Ошибка: ${res.status} - ${res.statusText}`);
+  });
+  // ({400 message: 'некорректно заполнено одно из полей' }));
 };
 
 export const authorize = (email, password) => {
@@ -24,13 +28,10 @@ export const authorize = (email, password) => {
     body: JSON.stringify({ email, password })
   })
   .then((res) => {
-    if (res.status === 400) {
-      res.status(400).res.send({ message: 'Не передано одно из полей' });
+    if (res.ok) {
+      return res.json();
     }
-    else if (res.status === 401) {
-      res.status(401).res.send({ message: 'Пользователь с таким email не найден' });
-    }
-    return res.json();
+    return Promise.reject(`Ошибка: ${res.status} - ${res.statusText}`);
   });
 };
 
@@ -44,12 +45,17 @@ export const getContent = (token) => {
     }
   })
   .then((res) => {
-    if (!res.ok) {
-      return res.json()
-        .then((err) => {
-          res.status(401).res.send(err.message);
-        });
+    if (res.ok) {
+      return res.json();
     }
-    return res.json()
+    return Promise.reject(`Ошибка: ${res.status} - ${res.statusText}`);
+    // if (!res.ok) {
+
+    //   return res.json()
+    //     .then((err) => {
+    //       res.status(401).res.send(err.message);
+    //     });
+    // }
+    // return res.json()
   })
 };

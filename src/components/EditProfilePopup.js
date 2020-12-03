@@ -30,6 +30,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
 
   return (
     <PopupWithForm
+      isModal={true}
       name={'edit-profile'} 
       title={'Редактировать профиль'} 
       children={

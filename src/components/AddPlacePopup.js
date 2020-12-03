@@ -16,6 +16,7 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
 
   return (
     <PopupWithForm 
+      isModal={true}
       name={'add-card'} 
       title={'Новое место'} 
       children={
