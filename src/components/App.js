@@ -17,13 +17,12 @@ import * as auth from '../utils/auth.js';
 import CurrentUserContext from '../contexts/CurrentUserContext.js';
 import resolveIcon from '../images/res.svg';
 import rejectIcon from '../images/rej.svg';
-import loader from '../images/loader.svg';
 
 function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [email, setEmail] = React.useState('');
   const [message, setMessage] = React.useState({
-    icon: loader,
+    icon: '',
     text: ''
   });
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
@@ -50,8 +49,8 @@ function App() {
           icon: rejectIcon, 
           text: 'Что-то пошло не так! Попробуйте ещё раз.' 
         });
+        setInfoTooltipOpen(true);
       });
-    setInfoTooltipOpen(true);
   }
 
   function handleRegister(email, password) {
@@ -67,6 +66,7 @@ function App() {
           icon: resolveIcon, 
           text: 'Вы успешно зарегистрировались!' 
         });
+        setInfoTooltipOpen(true);
       })
       .catch((err) => {
         console.error(err);
@@ -74,8 +74,8 @@ function App() {
           icon: rejectIcon, 
           text: 'Что-то пошло не так! Попробуйте ещё раз.' 
         });
+        setInfoTooltipOpen(true);
       });
-    setInfoTooltipOpen(true);
   }
 
   function handleLogout() {
@@ -181,8 +181,8 @@ function App() {
             icon: rejectIcon, 
             text: 'Что-то пошло не так! Попробуйте ещё раз.' 
           });
+          setInfoTooltipOpen(true);
         });
-      setInfoTooltipOpen(true);
     }
   }, []);
 
