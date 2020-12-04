@@ -60,8 +60,7 @@ function App() {
           localStorage.setItem('jwt', data.jwt);
           setEmail(data.data.email);
         }
-        setLoggedIn(true);
-        history.push('/');
+        history.push('/signin');
         setMessage({ 
           icon: resolveIcon, 
           text: 'Вы успешно зарегистрировались!' 
